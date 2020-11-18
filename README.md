@@ -2,7 +2,7 @@
 winform无边框窗口仿Mac
 
 预览
-![image](https://github.com/UncleMountain/MacForm/blob/master/MacForm.png?raw=true)
+![image](https://github.com/UncleMountain/MacForm/blob/master/MacForm.png)
 
 图标使用Font Awesome 进行图标绘制
 https://fontawesome.dashgame.com/
