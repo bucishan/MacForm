@@ -8,6 +8,20 @@ namespace MacForm
 {
     public partial class BaseForm : Form
     {
+        public BaseForm()
+        {
+            //this.Load += BaseForm_Load;
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// 窗体加载事件 设置窗体圆角
+        /// </summary>
+        private void BaseForm_Load(object sender, EventArgs e)
+        {
+            SetFormRoundRectRgn(this, 3);	//设置圆角
+        }
+
         #region 窗体阴影特效
         protected override CreateParams CreateParams
         {
@@ -19,19 +33,7 @@ namespace MacForm
             }
         }
         #endregion
-        public BaseForm()
-        {
-            this.Load += BaseForm_Load;
-            InitializeComponent();
 
-        }
-        /// <summary>
-        /// 窗体加载事件 设置窗体圆角
-        /// </summary>
-        private void BaseForm_Load(object sender, EventArgs e)
-        {
-            SetFormRoundRectRgn(this, 3);	//设置圆角
-        }
 
 
         #region ----------自定义属性----------
@@ -106,7 +108,6 @@ namespace MacForm
         }
         #endregion
 
-
         #region ----------Window API使用常量----------
 
         public const int WM_ERASEBKGND = 0x0014;
@@ -179,6 +180,17 @@ namespace MacForm
         }
 
         /// <summary>
+        /// 窗口拖动事件
+        /// </summary>
+        public static void Window_MouseDown(object sender, MouseEventArgs e)
+        {
+            Control ctrl = (Control)sender;
+            Form ParentForm = ctrl.FindForm();
+            ReleaseCapture();
+            SendMessage(ParentForm.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
+        }
+
+        /// <summary>
         /// 设置窗体的圆角矩形
         /// </summary>
         /// <param name="form">需要设置的窗体</param>
@@ -225,7 +237,7 @@ namespace MacForm
                         {
                             this.WindowState = FormWindowState.Maximized;
                         }
-                        SetFormRoundRectRgn(this, 3);   //设置圆角
+                        //SetFormRoundRectRgn(this, 3);   //设置圆角
 
                         break;
                     }
